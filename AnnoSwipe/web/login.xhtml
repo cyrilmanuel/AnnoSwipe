@@ -1,0 +1,28 @@
+<ui:composition template="/Template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="content">
+        <b:row styleClass="show-grid">
+            <b:column col-md="4" offset="4">
+                <b:form styleClass="form-signin" prependId="false" onsubmit="this.action='j_security_check';">
+                    <h2 class="form-signin-heading" style="text-align: center"><h:outputText value="Please sign in"/></h2>
+                    <b:inputText name="j_username" id="username" placeholder="Your Username" >
+                        <f:facet name="prepend">
+                            <b:icon name="user" />
+                        </f:facet>
+                    </b:inputText>
+                    <b:inputText name="j_password" id="password" placeholder="Password" type="password">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key" />
+                        </f:facet>
+                    </b:inputText>
+                    <b:selectBooleanCheckbox value="true" caption="remember me"/>
+                    <b:commandButton type="submit" look="primary btn-block" value="Sign In" icon="log-in" size="lg"/>
+                </b:form>    
+            </b:column>
+        </b:row>  
+    </ui:define>
+</ui:composition>

@@ -6,18 +6,18 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <link href="style.css" rel="stylesheet" type="text/css" />
         <title>AnnoSwipe - Accueil</title>
     </h:head>
     <h:body>
         <f:view>
             <b:container>
-                <b:navBar brand="AnnoSwipe" brandHref="#" inverse="true">
+                <b:navBar brand="AnnoSwipe" inverse="true">
                     <b:navbarLinks>
-                        <b:navLink value="Home" href="#"></b:navLink>
-                        <b:navLink value="Account" href="#"></b:navLink>
+                         <b:navLink value="Home" outcome="/default/index"></b:navLink>
+                        <b:navLink value="Account" outcome="/default/index"></b:navLink>
                         <b:navbarLinks pull="right">
-                            <b:navLink value="Login" href="#"></b:navLink>
+                            <b:navLink value="Login" outcome="/login"></b:navLink>
+                            <b:navLink value="Subscribe" outcome="/default/subscribe"></b:navLink>
                         </b:navbarLinks>
                     </b:navbarLinks>
                 </b:navBar>
@@ -27,7 +27,7 @@
                 </b:jumbotron>
 
                 <b:row styleClass="show-grid">
-                    
+
                     <b:column col-md="12">
                         <ui:insert name="content"></ui:insert>
                     </b:column>
