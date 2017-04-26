@@ -19,3 +19,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+/AnnoSwipe_1/nbproject/private/

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditAnnonceTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditAnnonceLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{annonceController.selected.id}" title="#{bundle.EditAnnonceTitle_id}" required="true" requiredMessage="#{bundle.EditAnnonceRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditAnnonceLabel_annonceName}" for="annonceName" />
+                    <h:inputText id="annonceName" value="#{annonceController.selected.annonceName}" title="#{bundle.EditAnnonceTitle_annonceName}" required="true" requiredMessage="#{bundle.EditAnnonceRequiredMessage_annonceName}"/>
+                    <h:outputLabel value="#{bundle.EditAnnonceLabel_annoncePrice}" for="annoncePrice" />
+                    <h:inputText id="annoncePrice" value="#{annonceController.selected.annoncePrice}" title="#{bundle.EditAnnonceTitle_annoncePrice}" required="true" requiredMessage="#{bundle.EditAnnonceRequiredMessage_annoncePrice}"/>
+                    <h:outputLabel value="#{bundle.EditAnnonceLabel_annonceDescription}" for="annonceDescription" />
+                    <h:inputTextarea rows="4" cols="30" id="annonceDescription" value="#{annonceController.selected.annonceDescription}" title="#{bundle.EditAnnonceTitle_annonceDescription}" required="true" requiredMessage="#{bundle.EditAnnonceRequiredMessage_annonceDescription}"/>
+                    <h:outputLabel value="#{bundle.EditAnnonceLabel_annoncedateParution}" for="annoncedateParution" />
+                    <h:inputText id="annoncedateParution" value="#{annonceController.selected.annoncedateParution}" title="#{bundle.EditAnnonceTitle_annoncedateParution}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditAnnonceLabel_annonceUserId}" for="annonceUserId" />
+                    <h:selectOneMenu id="annonceUserId" value="#{annonceController.selected.annonceUserId}" title="#{bundle.EditAnnonceTitle_annonceUserId}" >
+                        <f:selectItems value="#{usersController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{annonceController.update}" value="#{bundle.EditAnnonceSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditAnnonceViewLink}"/>
+                <br />
+                <h:commandLink action="#{annonceController.prepareList}" value="#{bundle.EditAnnonceShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditAnnonceIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

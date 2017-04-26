@@ -1,0 +1,34 @@
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+    </ui:define>
+    <ui:define name="body">
+
+        <b:row styleClass="show-grid">
+            <b:column col-md="6" offset="3">
+                <b:form styleClass="form-signin" prependId="false">
+                    <h1 class="form-signin-heading" style="text-align: center"><h:outputText value="Create your Account"/></h1>           
+
+                    <b:inputText value="#{usersController.selected.loginName}" id="username" placeholder="Your Username" >
+                        <f:facet name="prepend">
+                            <b:icon name="user" />
+                        </f:facet>
+                    </b:inputText>
+                    <b:inputText value="#{usersController.selected.password}" name="password" id="password" placeholder="Password" type="password">
+                        <f:facet name="prepend">
+                            <b:iconAwesome name="key" />
+                        </f:facet>
+                    </b:inputText>
+                    <b:commandButton type="submit" action="#{usersController.create(1)}" look="primary btn-block" value="Create Account" size="lg"/>
+                </b:form>    
+            </b:column>
+        </b:row>     
+    </ui:define>
+</ui:composition>

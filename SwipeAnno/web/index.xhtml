@@ -1,0 +1,22 @@
+<ui:composition template="/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core">
+    
+    <ui:define name="titleHead"><h:outputText value="index"></h:outputText></ui:define>
+    <ui:define name="title"><h:outputText value="page d'acceuil"></h:outputText></ui:define>
+    <ui:define name="body">
+        
+        
+        <h1 style="text-align: center">Bienvenu sur le nouveau site d'annonce rapide</h1>
+        <br />
+        <h:link outcome="/other/createAnnonce" value="creation d'une annonce"/>
+        <br />
+        <h:link outcome="/groups/List" value="Show All Groups Items"/>
+        <br />
+        <h:link outcome="/users/List" value="Show All Users Items"/>
+    </ui:define>
+</ui:composition>
+
