@@ -13,23 +13,17 @@
     </h:head>
     <h:body>
         <f:view>
-
             <b:container>
                 <b:form>
                     <b:navBar brand="AnnoSwipe" inverse="true">
                         <b:navbarLinks>
                             <b:navLink value="Home" outcome="/index"></b:navLink>
-                            <b:navLink rendered="#{not empty request.remoteUser and request.isUserInRole('other_user_role')}" value="Account" outcome="/other/account"></b:navLink>
                             <b:navbarLinks pull="right">
-
                                 <b:navLink rendered="#{empty request.remoteUser}" value="Login" outcome="/login"></b:navLink>
                                 <b:navLink rendered="#{empty request.remoteUser}" value="Subscribe" outcome="/subscribe"></b:navLink>
-                                <b:navLink rendered="#{not empty request.remoteUser and request.isUserInRole('other_user_role')}" value="My Annonces" outcome="/other/viewAnnonceUser"></b:navLink>
-
-
-
+                                <b:navLink rendered="#{not empty request.remoteUser and request.isUserInRole('other_user_role')}" value="My want ads" outcome="/other/viewAnnonceUser"></b:navLink>
+                                <b:navLink rendered="#{not empty request.remoteUser and request.isUserInRole('other_user_role')}" value="Create a want ad" outcome="/other/createAnnonce"></b:navLink>
                                 <b:navCommandLink rendered="#{not empty request.remoteUser}" value="Logout" action="#{usersController.logout()}"></b:navCommandLink>
-                                
                                 <b:navLink rendered="#{not empty request.remoteUser and request.isUserInRole('admin_role')}" value="admin Users" outcome="/users/List"></b:navLink>
                                 <b:navLink rendered="#{not empty request.remoteUser and request.isUserInRole('admin_role')}" value="admin Annonces" outcome="/annonce/List"></b:navLink>
                                 <b:navLink rendered="#{not empty request.remoteUser and request.isUserInRole('admin_role')}" value="admin Groups" outcome="/groups/List"></b:navLink>
@@ -37,12 +31,9 @@
                         </b:navbarLinks>
                     </b:navBar>
                 </b:form>
-                <b:jumbotron>
-                    <ui:insert name="title">Default Title</ui:insert>
-                </b:jumbotron>
 
+                <ui:insert name="title"></ui:insert>
                 <b:row styleClass="show-grid">
-
                     <b:column col-md="12">
                         <ui:insert name="body"></ui:insert>
                     </b:column>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewAnnonceTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewAnnonceLabel_id}"/>
+                    <h:outputText value="#{annonceController.selected.id}" title="#{bundle.ViewAnnonceTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewAnnonceLabel_annonceName}"/>
+                    <h:outputText value="#{annonceController.selected.annonceName}" title="#{bundle.ViewAnnonceTitle_annonceName}"/>
+                    <h:outputText value="#{bundle.ViewAnnonceLabel_annoncePrice}"/>
+                    <h:outputText value="#{annonceController.selected.annoncePrice}" title="#{bundle.ViewAnnonceTitle_annoncePrice}"/>
+                    <h:outputText value="#{bundle.ViewAnnonceLabel_annonceDescription}"/>
+                    <h:outputText value="#{annonceController.selected.annonceDescription}" title="#{bundle.ViewAnnonceTitle_annonceDescription}"/>
+                    <h:outputText value="#{bundle.ViewAnnonceLabel_annoncedateParution}"/>
+                    <h:outputText value="#{annonceController.selected.annoncedateParution}" title="#{bundle.ViewAnnonceTitle_annoncedateParution}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewAnnonceLabel_annonceUserId}"/>
+                    <h:outputText value="#{annonceController.selected.annonceUserId}" title="#{bundle.ViewAnnonceTitle_annonceUserId}"/>
+                </h:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

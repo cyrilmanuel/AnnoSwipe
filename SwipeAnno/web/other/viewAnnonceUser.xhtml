@@ -6,10 +6,13 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="titleHead"><h:outputText value="list of your's annonce"></h:outputText></ui:define>
     <ui:define name="title">
-        List of your's annonces
+        <b:jumbotron style="text-align: center">
+        List of your ads
+         </b:jumbotron>
     </ui:define>
 
     <ui:define name="body">
+
         <h:form styleClass="jsfcrud_list_form">
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
@@ -17,11 +20,10 @@
             <h:outputText escape="false" value="#{bundle.ListAnnonceEmpty}" rendered="#{annonceController.items.rowCount == 0}"/>
             <h:panelGroup rendered="#{annonceController.items.rowCount > 0}">
                 <h:outputText value="#{annonceController.pagination.pageFirstItem + 1}..#{annonceController.pagination.pageLastItem + 1}/#{annonceController.pagination.itemsCount}"/>
-                <h:commandLink action="#{annonceController.previous}" value="#{bundle.Previous} #{annonceController.pagination.pageSize}" rendered="#{annonceController.pagination.hasPreviousPage}"/>
-                <h:commandLink action="#{annonceController.next}" value="#{bundle.Next} #{annonceController.pagination.pageSize}" rendered="#{annonceController.pagination.hasNextPage}"/>
-                
-                
-                <h:dataTable value="#{annonceController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                <h:commandLink action="#{annonceController.previous(1)}" value="#{bundle.Previous} #{annonceController.pagination.pageSize}" rendered="#{annonceController.pagination.hasPreviousPage}"/>
+                <h:commandLink action="#{annonceController.next(1)}" value="#{bundle.Next} #{annonceController.pagination.pageSize}" rendered="#{annonceController.pagination.hasNextPage}"/>
+          
+                <h:dataTable value="#{annonceController.authUser.annonceCollection}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListAnnonceTitle_id}"/>
@@ -64,21 +66,15 @@
                             <f:facet name="header">
 
                             </f:facet>
-                            <h:commandLink action="#{annonceController.prepareView}" value="#{bundle.ListAnnonceViewLink}"/>
+                            <h:commandLink action="#{annonceController.prepareView(item,1)}" value="#{bundle.ListAnnonceViewLink}"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{annonceController.prepareEdit}" value="#{bundle.ListAnnonceEditLink}"/>
+                            <h:commandLink action="#{annonceController.prepareEdit(item,1)}" value="#{bundle.ListAnnonceEditLink}"/>
                             <h:outputText value=" "/>
-                            <h:commandLink action="#{annonceController.destroy}" value="#{bundle.ListAnnonceDestroyLink}"/>
+                            <h:commandLink action="#{annonceController.destroy(item,1)}" value="#{bundle.ListAnnonceDestroyLink}"/>
                         </h:column>
-                  
                 </h:dataTable>
 
             </h:panelGroup>
-            <br />
-            <h:commandLink action="#{annonceController.prepareCreate}" value="#{bundle.ListAnnonceCreateLink}"/>
-            <br />
-            <br />
-            <h:link outcome="/index" value="#{bundle.ListAnnonceIndexLink}"/>
         </h:form>
     </ui:define>
 </ui:composition>

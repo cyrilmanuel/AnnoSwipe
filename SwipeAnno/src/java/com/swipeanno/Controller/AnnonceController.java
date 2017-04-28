@@ -29,7 +29,11 @@ public class AnnonceController implements Serializable {
     private com.swipeanno.Facades.AnnonceFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
-    Users authUser;
+    private Users authUser;
+    
+    public void display(Object o) {
+        System.out.println(o.toString());
+    }
 
     public AnnonceController() {
     }
@@ -82,6 +86,19 @@ public class AnnonceController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "View";
     }
+    
+    public String prepareView(Annonce annonce, int a) {
+        current =annonce;
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        switch (a) {
+                case 0:
+                   return "View";
+                case 1:
+                    return "/other/View";
+                default:
+                    return "View";
+            }
+    }
 
     public String prepareCreate() {
         current = new Annonce();
@@ -92,6 +109,9 @@ public class AnnonceController implements Serializable {
     public String create(int a) {
         try {
             current.setAnnonceUserId(authUser);
+            java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+            current.setAnnoncedateParution(date);
+            
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("AnnonceCreated"));
            switch (a) {
@@ -113,6 +133,19 @@ public class AnnonceController implements Serializable {
         selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
         return "Edit";
     }
+    
+     public String prepareEdit(Annonce annonce, int a) {
+        current =annonce;
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        switch (a) {
+                case 0:
+                   return "Edit";
+                case 1:
+                    return "/other/Edit";
+                default:
+                    return "Edit";
+            }
+    }
 
     public String update() {
         try {
@@ -133,6 +166,23 @@ public class AnnonceController implements Serializable {
         recreateModel();
         return "List";
     }
+    
+     public String destroy(Annonce annonce, int a) {
+        current = annonce;
+        selectedItemIndex = pagination.getPageFirstItem() + getItems().getRowIndex();
+        performDestroy();
+        recreatePagination();
+        recreateModel();
+         switch (a) {
+                case 0:
+                   return "List";
+                case 1:
+                    return "/index";
+                default:
+                    return "List";
+            }
+    }
+    
 
     public String destroyAndView() {
         performDestroy();
@@ -191,15 +241,31 @@ public class AnnonceController implements Serializable {
         recreateModel();
         return "List";
     }
+    
+    public String next(int a) {
+         getPagination().nextPage();
+        recreateModel();
+        return "/other/viewAnnonceUser";
+    }
 
     public String previous() {
         getPagination().previousPage();
         recreateModel();
         return "List";
     }
+     public String previous(int a) {
+        getPagination().previousPage();
+        recreateModel();
+        return "/other/viewAnnonceUser";
+    }
+    
 
     public SelectItem[] getItemsAvailableSelectMany() {
         return JsfUtil.getSelectItems(ejbFacade.findAll(), false);
+    }
+    
+    public SelectItem[] getItemsAvailableSelectManyMe(int id) {
+        return JsfUtil.getSelectItems(ejbFacade.findForUser(id), false);
     }
 
     public SelectItem[] getItemsAvailableSelectOne() {

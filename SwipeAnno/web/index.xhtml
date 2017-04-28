@@ -4,19 +4,57 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core">
-    
+
     <ui:define name="titleHead"><h:outputText value="index"></h:outputText></ui:define>
-    <ui:define name="title"><h:outputText value="page d'acceuil"></h:outputText></ui:define>
     <ui:define name="body">
+
+
+        <h1 style="text-align: center">Welcome to AnnoSwipe! Please login to see the want ads </h1>
+
+ 
         
-        
-        <h1 style="text-align: center">Bienvenu sur le nouveau site d'annonce rapide</h1>
-        <br />
-        <h:link outcome="/other/createAnnonce" value="creation d'une annonce"/>
-        <br />
-        <h:link outcome="/groups/List" value="Show All Groups Items"/>
-        <br />
-        <h:link outcome="/users/List" value="Show All Users Items"/>
+
+        <b:row styleClass="grid">
+            <ui:repeat value="#{annonceController.items}" var="item" rendered="#{not empty request.remoteUser and request.isUserInRole('other_user_role')}">
+
+                <b:column col-md="4">
+                    <b:panel style="text-align: center">
+                        <h:outputText value="#{item.annonceName}" style="text-align: center" />
+                    </b:panel>
+                    <b:row>
+                        <b:column col-md="6" style="text-align: center">
+                            <h:outputText value="Price"/>
+                        </b:column>
+                        <b:column col-md="6" style="text-align: center">
+                            <h:outputText value="#{item.annoncePrice} CHF"/>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                    <b:column col-md="12" >
+                        <h:outputText value="#{item.annonceDescription}"/>
+                    </b:column>
+                        </b:row>
+                    <b:row>
+                        <b:column col-md="6" style="text-align: center">
+                            <h:outputText value="Date"/>
+                        </b:column>
+                        <b:column col-md="6" style="text-align: center">
+                            <h:outputText value="#{item.annoncedateParution}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>
+                        </b:column>
+                    </b:row> 
+                    <b:row>
+                        <b:column col-md="6" style="text-align: center">
+                            <h:outputText value="By User "/>
+                        </b:column>
+                        <b:column col-md="6" style="text-align: center">
+                            <h:outputText value="#{item.annonceUserId.loginName}"/>
+                        </b:column>
+                    </b:row>
+                </b:column>
+            </ui:repeat>
+        </b:row>
     </ui:define>
 </ui:composition>
 

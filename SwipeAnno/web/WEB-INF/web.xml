@@ -72,4 +72,9 @@
     <security-role>
         <role-name>admin_role</role-name>
     </security-role>
+    
+    <context-param>
+    <param-name>BootsFaces_THEME</param-name>
+    <param-value>superhero</param-value>
+    </context-param>
 </web-app>

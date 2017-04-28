@@ -5,22 +5,25 @@
                 xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="titleHead"><h:outputText value="new annonce"></h:outputText></ui:define>
     <ui:define name="title">
+        <b:jumbotron style="text-align: center">
         <h:panelGroup id="messagePanel" layout="block">
             <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
         </h:panelGroup>
+         </b:jumbotron>
     </ui:define>
 
     <ui:define name="body">
         <b:row styleClass="show-grid">
           <b:column col-md="6" offset="3">
-               <b:form styleClass="form-signin" prependId="false">
-                    <b:inputText name="annonceName" id="annonceName" placeholder="title of annonce" value="#{annonceController.selected.annonceName}" >
+               <b:form prependId="false">
+                    <b:inputText name="annonceName" id="annonceName" placeholder="title" value="#{annonceController.selected.annonceName}" >
                     </b:inputText>
                     <b:inputText name="annoncePrice" id="annoncePrice" placeholder="price CHF" value="#{annonceController.selected.annoncePrice}" >
                     </b:inputText>
                     <b:inputTextarea id="annonceDescription" placeholder="description" value="#{annonceController.selected.annonceDescription}" >
                     </b:inputTextarea>
-                    <b:commandButton type="submit" onclick="annonceController.authUser(userController.loggedUser())"  action="#{annonceController.create(1)}" look="primary btn-block" value="Create annonce" size="md"/>
+                   
+                   <b:commandButton type="submit" onclick="#{annonceController.setAuthUser(usersController.JUIF())}"  action="#{annonceController.create(1)}" look="primary btn-block" value="Create annonce" size="md"/>
                
                </b:form>    
             </b:column>  

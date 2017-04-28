@@ -25,15 +25,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author cyriljeanneret
- */
+
 @Entity
 @Table(name = "annonce")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Annonce.findAll", query = "SELECT a FROM Annonce a")
+    , @NamedQuery(name = "Annonce.findForUser", query = "SELECT a FROM Annonce a WHERE a.annonceUserId = :annonceUserId")
     , @NamedQuery(name = "Annonce.findById", query = "SELECT a FROM Annonce a WHERE a.id = :id")
     , @NamedQuery(name = "Annonce.findByAnnonceName", query = "SELECT a FROM Annonce a WHERE a.annonceName = :annonceName")
     , @NamedQuery(name = "Annonce.findByAnnoncePrice", query = "SELECT a FROM Annonce a WHERE a.annoncePrice = :annoncePrice")

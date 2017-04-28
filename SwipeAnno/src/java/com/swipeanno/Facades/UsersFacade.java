@@ -39,7 +39,7 @@ public class UsersFacade extends AbstractFacade<Users> {
     }
     
     public Users findUserByName(String name) {
-    Query users = em.createNamedQuery("Users.findByName").setParameter("login_name", name);
+    Query users = em.createNamedQuery("Users.findByLoginName").setParameter("loginName", name);
     return (Users) users.getSingleResult();
 }
 }

@@ -45,6 +45,7 @@ public class UsersController implements Serializable {
         return current;
     }
 
+    
     private UsersFacade getFacade() {
         return ejbFacade;
     }
@@ -125,6 +126,23 @@ public class UsersController implements Serializable {
             getFacade().edit(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
             return "View";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+            return null;
+        }
+    }
+    
+    public String update(int idUser) {
+        try {
+            current.setId(idUser);
+            
+            
+            System.out.println(current.getPassword().toString());
+            
+            
+            getFacade().edit(current);
+            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("UsersUpdated"));
+            return "/other/account";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;
@@ -216,6 +234,14 @@ public class UsersController implements Serializable {
         return ejbFacade.find(id);
     }
 
+    public Users JUIF() {
+   
+        String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
+        if (remoteUser != null) {
+            current = ejbFacade.findUserByName(remoteUser);
+        }
+        return current;
+    }
     public void logout() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -225,15 +251,7 @@ public class UsersController implements Serializable {
         }
     }
 
-    public Users getLoggedUser() {
-        String remoteUser = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-        if (remoteUser != null) {
-            
-            current = ejbFacade.findUserByName(remoteUser);
-            System.err.println("NIQUE TA MERE "+current.getId());
-        }
-        return current;
-    }
+    
 
     @FacesConverter(forClass = Users.class)
     public static class UsersControllerConverter implements Converter {
